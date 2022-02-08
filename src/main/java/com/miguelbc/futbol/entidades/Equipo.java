@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-
+//gay
 
 @Entity
 @Table(name = "Equipo")
