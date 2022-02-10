@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-//gay
+
 
 @Entity
 @Table(name = "Equipo")
@@ -68,6 +68,12 @@ public class Equipo implements Serializable{
 
 	public void setEstadio(String estadio) {
 		this.estadio = estadio;
+	}
+
+	@Override
+	public String toString() {
+		return "Equipo [id=" + id + ", nombre=" + nombre + ", fechaCreacion=" + fechaCreacion + ", estadio=" + estadio
+				+ "]";
 	}
 	
 	

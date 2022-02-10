@@ -93,6 +93,13 @@ public class Futbolista implements Serializable{
 	public void setNif(String nif) {
 		this.nif = nif;
 	}
+
+	@Override
+	public String toString() {
+		return "Futbolista [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaNac=" + fechaNac
+				+ ", nacionalidad=" + nacionalidad + ", nif=" + nif + "]";
+	}
+	
 	
 	
 }
