@@ -15,6 +15,8 @@ public interface Repos_Equipo_Futbolista extends JpaRepository<EquipoFutbolista,
 	
 	List <Equipo> findByFutbolistaId(Long Id);
 	
+	List<EquipoFutbolista> findByTemporada(Date temporada);
+	
 	
 	
 }

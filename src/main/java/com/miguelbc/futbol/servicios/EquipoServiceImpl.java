@@ -3,55 +3,49 @@ package com.miguelbc.futbol.servicios;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.miguelbc.futbol.entidades.Equipo;
+import com.miguelbc.futbol.repositorio.Repos_Equipo;
 
+@Service
 public class EquipoServiceImpl implements EquipoServiceI{
 
-	private EquipoServiceI serviceI;
+	@Autowired
+	private Repos_Equipo serviceI;
 	
 	@Override
 	public List<Equipo> obtenerTodosEquipos() {
 		// TODO Auto-generated method stub
-		return serviceI.obtenerTodosEquipos();
+		return serviceI.findAll();
 	}
 
 	@Override
 	public Equipo obtenerEquipoPorNombre(String nombre) {
 		// TODO Auto-generated method stub
-		final Equipo team = (Equipo) serviceI.obtenerEquipoPorNombre(nombre);
+		final Equipo team = (Equipo) serviceI.findByNombre(nombre);
 		return team;
 	}
 
-	@Override
-	public List<Equipo> obtenerEquipoPorNombreOEstadio(String nombre, String estadio) {
-		// TODO Auto-generated method stub
-		return serviceI.obtenerEquipoPorNombreOEstadio(nombre, estadio);
-	}
-
-	@Override
-	public List<Equipo> obtenerEquipoPorNombreYEstadio(String nombre, String estadio) {
-		// TODO Auto-generated method stub
-		return serviceI.obtenerEquipoPorNombreYEstadio(nombre, estadio);
-	}
 
 	@Override
 	public void eliminarEquipoPorId(long id) {
 		// TODO Auto-generated method stub
-		serviceI.eliminarEquipoPorId(id);
+		serviceI.deleteById(id);
 	}
 
 	@Override
 	public void aniadirEquipo(Equipo equipo) {
 		// TODO Auto-generated method stub
-		serviceI.aniadirEquipo(equipo);
+		serviceI.save(equipo);
 	}
 
 	@Override
 	public void actualizarEquipo(Equipo equipo) {
 		// TODO Auto-generated method stub
-		serviceI.actualizarEquipo(equipo);
+		serviceI.save(equipo);
 	}
+
 	
 	
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>La Liga</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	</head>
+	<body class="card-body">
+
+		<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+		    <a class="navbar-brand" th:href="@{/carsView}" role="button">Ver todos los equipos disponibles.</a>
+			<a class="navbar-brand" th:href="@{/searchCarByView}" role="button">Buscar un equipo en concreto.</a>
+			<a class="navbar-brand" th:href="@{/newCarView}" role="button">Inserta tu propio equipo.</a>
+		</nav>
+	
+		<div class="card text-white bg-dark mb-3">
+		  	<div class="card-body">
+				<h3>Bienvenido a la aplicación de la liga.</h3>
+				<h4>Por favor, seleccione una operación.</h4>
+			</div>
+		</div>
+</body>
+</html>

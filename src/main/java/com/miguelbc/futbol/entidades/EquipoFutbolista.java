@@ -29,7 +29,57 @@ public class EquipoFutbolista implements Serializable{
     @JoinColumn(name = "futbolista_id")
     Futbolista futbolista;
     
-    
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Date temporada;
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public Equipo getEquipo() {
+		return equipo;
+	}
+
+
+	public void setEquipo(Equipo equipo) {
+		this.equipo = equipo;
+	}
+
+
+	public Futbolista getFutbolista() {
+		return futbolista;
+	}
+
+
+	public void setFutbolista(Futbolista futbolista) {
+		this.futbolista = futbolista;
+	}
+
+
+	public Date getTemporada() {
+		return temporada;
+	}
+
+
+	public void setTemporada(Date temporada) {
+		this.temporada = temporada;
+	}
+
+
+	@Override
+	public String toString() {
+		return "EquipoFutbolista [id=" + id + ", equipo=" + equipo + ", futbolista=" + futbolista + ", temporada="
+				+ temporada + "]";
+	}
+	
+	
 
 }

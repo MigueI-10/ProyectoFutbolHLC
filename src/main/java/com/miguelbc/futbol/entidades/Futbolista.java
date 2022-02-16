@@ -32,6 +32,8 @@ public class Futbolista implements Serializable{
 	@Size(min = 4, max = 25, message = "el tamaño tiene que estar entre 4 y 25")
 	private String apellido;
 	
+	@Temporal(TemporalType.DATE)
+	@Column(nullable = false)
 	private Date fechaNac;
 	
 	

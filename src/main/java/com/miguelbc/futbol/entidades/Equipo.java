@@ -28,6 +28,7 @@ public class Equipo implements Serializable{
 	@Column(nullable = false)
 	private String nombre;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
 	private Date fechaCreacion;
 	
