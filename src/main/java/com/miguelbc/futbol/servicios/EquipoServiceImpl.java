@@ -13,19 +13,14 @@ public class EquipoServiceImpl implements EquipoServiceI{
 
 	@Autowired
 	private Repos_Equipo serviceI;
-	
+
 	@Override
 	public List<Equipo> obtenerTodosEquipos() {
 		// TODO Auto-generated method stub
 		return serviceI.findAll();
 	}
 
-	@Override
-	public Equipo obtenerEquipoPorNombre(String nombre) {
-		// TODO Auto-generated method stub
-		final Equipo team = (Equipo) serviceI.findByNombre(nombre);
-		return team;
-	}
+
 
 
 	@Override
@@ -46,6 +41,29 @@ public class EquipoServiceImpl implements EquipoServiceI{
 		serviceI.save(equipo);
 	}
 
-	
-	
+	@Override
+	public List<Equipo> obtenerEquipoPorEstadio(String estadio) {
+		// TODO Auto-generated method stub
+		return serviceI.findByEstadio(estadio);
+	}
+
+
+	@Override
+	public List<Equipo> obtenerEquipoPorNombre(String nombre) {
+		// TODO Auto-generated method stub
+		return serviceI.findByNombre(nombre);
+	}
+
+
+
+
+	@Override
+	public Equipo obtenerEquipoPorId(long id) {
+		// TODO Auto-generated method stub
+		Equipo e = serviceI.findJugadorByID(id);	
+		return e;
+	}
+
+
+
 }

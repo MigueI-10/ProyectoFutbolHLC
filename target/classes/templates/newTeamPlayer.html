@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>La Liga</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<style>
+			body{
+				background-image: url("https://previews.123rf.com/images/scenery1/scenery11708/scenery1170800055/83891725-fondo-de-c%C3%A9sped-campo-de-f%C3%BAtbol-de-hierba-verde-patr%C3%B3n-de-fondo.jpg");
+			}
+		</style>
+	</head>
+	
+	<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+		    <a class="navbar-brand" th:href="@{/showAll}" role="button">Equipos disponibles.</a>
+			<a class="navbar-brand" th:href="@{/searchTeamByView}" role="button">Buscar un Equipo</a>
+			<a class="navbar-brand" th:href="@{/newTeamView}" role="button">Inserta un equipo.</a>
+			
+			<a class="navbar-brand" th:href="@{/showAllPlayers}" role="button">Jugadores disponibles.</a>
+			<a class="navbar-brand" th:href="@{/searchPlayerByView}" role="button">Buscar un Jugador</a>
+			<a class="navbar-brand" th:href="@{/newPlayerView}" role="button">Inserta un jugador.</a>
+		</nav>
+	
+	<br>
+
+	
+	
+		<body class="card-body">
+		<div class="card text-white bg-dark mb-3">
+		  <div class="card-header">Datos del nuevo coche</div>
+		  <div class="card-body">
+				<form th:action="@{/actAddCar}" th:object="${newCar}" method="POST">
+					<div class="form-group">
+			  			<label for="inpCarRegs">Matrícula</label>
+			  			<input type="text" required="required" class="form-control" id="inpCarRegs" name="matricula" placeholder="Matrículo.">
+					</div>
+					<div class="form-group">
+						  <label for="inpCarBrand">Marca</label>
+						  <input type="text" required="required" class="form-control" id="inpCarBrand" name="marca" placeholder="Marca.">
+					</div>
+					<div class="form-group">
+						  <label for="inpCarModel">Modelo</label>
+						  <input required="required" type="text" class="form-control" id="inpCarModel" name="modelo" placeholder="Modelo.">
+					</div>
+					<button type="submit" name="btnAddCar" class="btn btn-success">Añadir</button>
+					<a class="btn btn-primary" href="index" role="button" id="aBtnReturn">Volver</a>
+				</form>
+			  </div>
+			</div>
+	</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>La Liga</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<style>
+			body{
+				background-image: url("https://previews.123rf.com/images/scenery1/scenery11708/scenery1170800055/83891725-fondo-de-c%C3%A9sped-campo-de-f%C3%BAtbol-de-hierba-verde-patr%C3%B3n-de-fondo.jpg");
+			}
+		</style>
+	</head>
+	<body class="card-body">
+	
+	<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+		    <a class="navbar-brand" th:href="@{/showAll}" role="button">Equipos disponibles.</a>
+			<a class="navbar-brand" th:href="@{/searchTeamByView}" role="button">Buscar Equipos</a>
+			<a class="navbar-brand" th:href="@{/newTeamView}" role="button">Insertar Equipo.</a>
+			<a class="navbar-brand" th:href="@{/newTeamPlayerView}" role="button">Inserta un Equipo-Futbolista.</a>
+		</nav>
+	
+	<br>
+
+		<div class="card text-white bg-dark mb-3">
+		  <div class="card-header">Búsqueda de jugadores</div>
+		  <div class="card-body">
+				<form th:action="@{/actSearchPlayer}" th:object="${searchedPlayer}" method="POST">
+					<div class="form-group">
+			  			<label for="inpRegistration">Nombre</label>
+			  			<input type="text" class="form-control" id="inpTeam" name="nombre" placeholder="nombre">
+					</div>
+					<div class="form-group">
+			  			<label for="inpRegistration">Nif</label>
+			  			<input type="text" class="form-control" id="inpStadium" name="nif" placeholder="nif">
+					</div>
+					</div>
+					<button type="submit" name="btnSearchTeamBy" class="btn btn-success">🔎</button>
+					<a class="btn btn-primary" href="index" role="button" id="aBtnReturn">🔙</a>
+				</form>
+			  </div>
+			</div>
+	</body>
+</html>
