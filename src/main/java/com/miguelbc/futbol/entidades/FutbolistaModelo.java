@@ -2,6 +2,7 @@ package com.miguelbc.futbol.entidades;
 
 import java.util.List;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

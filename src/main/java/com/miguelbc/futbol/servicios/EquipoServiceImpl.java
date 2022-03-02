@@ -60,7 +60,7 @@ public class EquipoServiceImpl implements EquipoServiceI{
 	@Override
 	public Equipo obtenerEquipoPorId(long id) {
 		// TODO Auto-generated method stub
-		Equipo e = serviceI.findJugadorByID(id);	
+		Equipo e = serviceI.findJugadorByID(id);
 		return e;
 	}
 

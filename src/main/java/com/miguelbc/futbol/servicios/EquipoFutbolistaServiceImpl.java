@@ -41,15 +41,31 @@ public class EquipoFutbolistaServiceImpl implements EquipoFutbolistaServiceI{
 	}
 
 	@Override
-	public List<Futbolista> obtenerJugadoresPorNombreClub(String nombre) {
+	public List<Futbolista> obtenerJugadoresPorIdClub(long idEquipo) {
+		// TODO Auto-generated method stub
+
+
+		return null;
+	}
+
+	@Override
+	public List<Equipo> obtenerClubPorIdJugador(long idFutbolista) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Equipo> obtenerClubPorDniJugador(String dni) {
+	public List<EquipoFutbolista> obtenerHistoriaFutbolista(long idFutbolista) {
 		// TODO Auto-generated method stub
-		return null;
+		return service.findFutbolista(idFutbolista);
 	}
+
+	@Override
+	public List<EquipoFutbolista> obtenerHistoriaClub(long idClub) {
+		// TODO Auto-generated method stub
+		return service.findEquipo(idClub);
+	}
+
+
 
 }

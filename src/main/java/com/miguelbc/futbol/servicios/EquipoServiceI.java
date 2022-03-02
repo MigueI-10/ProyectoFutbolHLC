@@ -9,7 +9,7 @@ import com.miguelbc.futbol.entidades.Equipo;
 public interface EquipoServiceI {
 
 	public List<Equipo> obtenerTodosEquipos();
-	
+
 	public Equipo obtenerEquipoPorId(final long id);
 
 	public List<Equipo> obtenerEquipoPorNombre(final String nombre);

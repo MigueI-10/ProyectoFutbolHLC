@@ -2,13 +2,12 @@ package com.miguelbc.futbol.servicios;
 
 import java.util.List;
 
-import com.miguelbc.futbol.entidades.Equipo;
 import com.miguelbc.futbol.entidades.Futbolista;
 
 public interface FutbolistaServiceI {
 
 	public List<Futbolista> obtenerTodosFutbolistas();
-	
+
 	public Futbolista obtenerFutbolistaPorId(final long id);
 
 	public List<Futbolista> obtenerFutbolistaPorNombre(final String nombre);

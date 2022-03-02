@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>LA LIGA</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	</head>
+	<body class="card-body">
+		<div class="card text-white bg-dark mb-3">
+		  	<div class="card-header">
+				<form th:action="@{/actSearchTrayectoria}" th:object="${searchedFutbolista}" method="POST">
+			  		<label for="futbolistas">Selecciona futbolista:</label>
+				  	<!--<select name="nombre" id="futs" th:field=${futbolistas}>
+				  		<option th:each="fut : ${futbolistas}"
+								th:text="${fut.nombre}" 
+								th:value="${fut.id}"/>
+				  	</select>-->
+				  	<div class="form-group">
+			  			<label for="inpFutRegs">Id:</label>
+			  			<input type="text" text-transform: "capitalize" class="form-control" id="inpFutRegs" name="id" placeholder="Nombre">
+					</div>
+			  		<button type="submit" name="btnSearchTrayectoriaBy" class="btn btn-success">Buscar datos</button>
+				</form>
+		  	</div>
+			<div class="card-body">
+				<table class="table table-striped table-dark">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Equipos</th>
+							<th scope="col">Temporada</th>
+						</tr>
+					</thead>
+					<tbody>
+						<th:block th:each="fut : ${equipoListView}">
+							<tr>
+								<td scope="row" th:text="${fut.nombre}" />
+								<td scope="row" th:text="${fut.anyo_crea}" />
+							</tr>
+						</th:block>
+					</tbody>
+				</table>
+				<a class="btn btn-primary" th:href="@{index}" id="aBtnReturn" role="button">Volver</a>
+			</div>
+		</div>
+	</body>
+</html>

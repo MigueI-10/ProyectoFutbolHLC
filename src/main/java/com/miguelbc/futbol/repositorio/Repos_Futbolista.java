@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.miguelbc.futbol.entidades.Equipo;
 import com.miguelbc.futbol.entidades.Futbolista;
 
 public interface Repos_Futbolista extends JpaRepository<Futbolista, Long>{

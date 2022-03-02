@@ -11,9 +11,13 @@ public interface EquipoFutbolistaServiceI {
 
 	public List<EquipoFutbolista> obtenerTodosEquiposFut();
 
-	public List<Futbolista> obtenerJugadoresPorNombreClub(final String nombre);
+	public List<EquipoFutbolista> obtenerHistoriaFutbolista(final long idFutbolista);
+	
+	public List<EquipoFutbolista> obtenerHistoriaClub(final long idClub);
 
-	public List<Equipo> obtenerClubPorDniJugador(final String dni);
+	public List<Futbolista> obtenerJugadoresPorIdClub(final long idEquipo);
+
+	public List<Equipo> obtenerClubPorIdJugador(final long idFutbolista);
 
 	public void eliminarEquipoFutPorId(final long id);
 

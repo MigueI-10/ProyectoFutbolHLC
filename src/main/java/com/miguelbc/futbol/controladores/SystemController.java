@@ -62,9 +62,17 @@ public class SystemController {
 			//Redirecciona a la plantilla de insercción
 			@GetMapping("/newTeamPlayerView")
 			public String redirectToNewTeamPlayer() {
-				return "newTeamPlayer";
+				return "redirect:actAddPlayerClub";
 			}
 
-
+			@GetMapping("/showPlayerHist")
+			public String redirectToHistoryPlayer() {
+				return "showHisFut";
+			}
+			
+			@GetMapping("/showClubHist")
+			public String redirectToHistoryClub() {
+				return "showHisClub";
+			}
 
 }

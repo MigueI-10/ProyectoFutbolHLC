@@ -1,7 +1,5 @@
 package com.miguelbc.futbol.controladores;
 
-import java.text.ParseException;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,7 +33,7 @@ public class EquipoController {
 	public String home() {
 		return "hello world";
 	}*/
-	
+
 	private long idUse = 0L;
 
 
@@ -51,14 +49,14 @@ public class EquipoController {
 
 		return "showTeams";
 	}
-	  
-	  
+
+
 	  @GetMapping("/editTeamsView")
 		public String recogerEquipo(String teamId, Model model) {
 
 			// Obtención de pacientes
 		// Obtención de pacientes
-		  
+
 		  idUse = Long.valueOf(teamId);
 					Equipo p = serviceI.obtenerEquipoPorId(Long.valueOf(teamId));
 
@@ -81,19 +79,19 @@ public class EquipoController {
 			e.setNombre(EquipoModelo.getNombre());
 			e.setEstadio(EquipoModelo.getEstadio());
 			e.setFechaCreacion(date);
-			
-			
+
+
 			if (result.hasErrors()) {
 				throw new Exception("Parámetros de matriculación erróneos");
 			}
 			else {
-				
+
 				serviceI.eliminarEquipoPorId(idUse);
 				serviceI.actualizarEquipo(e);
-				
+
 			}
 			// Obtención de pacientes
-			
+
 
 			return "redirect:showTeams";
 		}

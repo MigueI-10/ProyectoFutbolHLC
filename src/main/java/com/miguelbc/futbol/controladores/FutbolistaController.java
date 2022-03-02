@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.miguelbc.futbol.entidades.Equipo;
-import com.miguelbc.futbol.entidades.EquipoModelo;
 import com.miguelbc.futbol.entidades.Futbolista;
 import com.miguelbc.futbol.entidades.FutbolistaModelo;
 import com.miguelbc.futbol.servicios.FutbolistaServiceI;
@@ -28,7 +26,7 @@ public class FutbolistaController {
 
 	@Autowired
 	private FutbolistaServiceI serviceI;
-	
+
 	private long idUse = 0L;
 
 
@@ -51,15 +49,15 @@ public class FutbolistaController {
 
 		return "showPlayers";
 	}
-	
+
 	 @GetMapping("/editPlayersView")
 		public String recogerJugador(String playerId, Model model) {
 
 			// Obtención de pacientes
 		// Obtención de pacientes
-		  
+
 		  idUse = Long.valueOf(playerId);
-		  
+
 		  Futbolista p = serviceI.obtenerFutbolistaPorId(Long.valueOf(playerId));
 
 		//Carga de datos al modelo
@@ -68,7 +66,7 @@ public class FutbolistaController {
 		  model.addAttribute("apellido", p.getApellido());
 		  model.addAttribute("nacionalidad", p.getNacionalidad());
 		  model.addAttribute("fechaNac", p.getFechaNac());
-					
+
 			return "editPlayer";
 		}
 
@@ -87,25 +85,25 @@ public class FutbolistaController {
 			f.setFechaNac(date);
 			f.setNacionalidad(FutbolistaModelo.getNacionalidad());
 			f.setNif(FutbolistaModelo.getNif());
-			
-			
+
+
 			if (result.hasErrors()) {
 				throw new Exception("Parámetros de matriculación erróneos");
 			}
 			else {
-				
+
 				serviceI.eliminarFutbolistaPorId(idUse);
 				serviceI.actualizarFutbolista(f);
-				
+
 			}
 			// Obtención de pacientes
-			
 
-			return "redirect:showTeams";
+
+			return "redirect:showPlayers";
 		}
-	
-	
-	
+
+
+
 
 	@PostMapping("/actDropPlayer")
 	public String eliminarJugador(@RequestParam Long playerId, Model model) {
