@@ -37,6 +37,11 @@ public class FutbolistaController {
 	}*/
 
 
+	/***
+	 * Metodo que sirve para mostrar todos los jugadores
+	 * @param model
+	 * @return la vista de todos los jugadores
+	 */
 	@GetMapping("/showPlayerViews")
 	public String mostrarJugadores(Model model) {
 
@@ -50,6 +55,12 @@ public class FutbolistaController {
 		return "showPlayers";
 	}
 
+	/***
+	 * Metodo que recoge los datos de un futbolista con su id
+	 * @param playerId del jugador a modificar
+	 * @param model
+	 * @return la vista para poder actualizar los datos
+	 */
 	 @GetMapping("/editPlayersView")
 		public String recogerJugador(String playerId, Model model) {
 
@@ -60,6 +71,7 @@ public class FutbolistaController {
 
 		  Futbolista p = serviceI.obtenerFutbolistaPorId(Long.valueOf(playerId));
 
+		  model.addAttribute("id", p.getId());
 		//Carga de datos al modelo
 		  model.addAttribute("nif", p.getNif());
 		  model.addAttribute("nombre", p.getNombre());
@@ -70,41 +82,50 @@ public class FutbolistaController {
 			return "editPlayer";
 		}
 
-		@GetMapping("/actEditPlayer")
+	 /***
+	  * Metodo que sirve para actualizar un jugador
+	  * @param FutbolistaModelo objeto con los datos a modificar
+	  * @param result
+	  * @return retorna la vista de todos los jugadores para ver los cambios realizados
+	  * @throws Exception por si hay fallo al parsear una fecha
+	  */
+		@PostMapping("/actEditPlayer")
 		public String editarFutbolista(@Valid @ModelAttribute FutbolistaModelo FutbolistaModelo, BindingResult result) throws Exception {
-
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-
-			Date date = formatter.parse(FutbolistaModelo.getFechaNac());
-
-			Futbolista f = new Futbolista();
-
-			f.setNombre(FutbolistaModelo.getNombre());
-			f.setApellido(FutbolistaModelo.getApellido());
-			f.setFechaNac(date);
-			f.setNacionalidad(FutbolistaModelo.getNacionalidad());
-			f.setNif(FutbolistaModelo.getNif());
-
 
 			if (result.hasErrors()) {
 				throw new Exception("Parámetros de matriculación erróneos");
 			}
 			else {
 
-				serviceI.eliminarFutbolistaPorId(idUse);
+				System.out.println(FutbolistaModelo.toString());
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+
+				Date date = formatter.parse(FutbolistaModelo.getFechaNac());
+
+				Futbolista f = serviceI.obtenerFutbolistaPorId(FutbolistaModelo.getId());
+
+				f.setNombre(FutbolistaModelo.getNombre());
+				f.setApellido(FutbolistaModelo.getApellido());
+				f.setFechaNac(date);
+				f.setNacionalidad(FutbolistaModelo.getNacionalidad());
+				f.setNif(FutbolistaModelo.getNif());
+
 				serviceI.actualizarFutbolista(f);
 
 			}
-			// Obtención de pacientes
 
-
-			return "redirect:showPlayers";
+			return "redirect:showPlayerViews";
 		}
 
 
 
-
+	/***
+	 * Metodo para eliminar un jugador
+	 * @param playerId del jugador a borrar
+	 * @param model
+	 * @return la lista de todos los jugadores
+	 */
 	@PostMapping("/actDropPlayer")
 	public String eliminarJugador(@RequestParam Long playerId, Model model) {
 
@@ -112,10 +133,17 @@ public class FutbolistaController {
 		// Eliminación de vehículo
 		serviceI.eliminarFutbolistaPorId(Long.valueOf(playerId));
 
-		return "redirect:showPlayers";
+		return "redirect:showPlayerViews";
 
 	}
 
+	/***
+	 * Metodo que sirve para buscar un jugador concreto por nombre o nif
+	 * @param searchedPlayer
+	 * @param model
+	 * @return la vista con los jugadores encontrados
+	 * @throws Exception
+	 */
 	@PostMapping("/actSearchPlayer")
 	public String submitBuscarPlayerForm(@ModelAttribute Futbolista searchedPlayer, Model model) throws Exception {
 
@@ -153,11 +181,17 @@ public class FutbolistaController {
 			throw new Exception("No se encontró el jugador");
 		}
 
-		return "showPlayers";
+		return "showPlayerViews";
 
 	}
 
-
+	/***
+	 * Metodo que inserta un jugador a la base de datos
+	 * @param player a insertar
+	 * @param result
+	 * @return la lista de jugadores para ver la insercion
+	 * @throws Exception por si salta a la hora de parsear una fecha
+	 */
 
 	@PostMapping("/actAddPlayer")
 	private String aniadirJugador(@Valid @ModelAttribute FutbolistaModelo player, BindingResult result) throws Exception {
@@ -188,7 +222,7 @@ public class FutbolistaController {
 			serviceI.aniadirFutbolista(f);
 		}
 
-		return "redirect:showPlayers";
+		return "redirect:showPlayerViews";
 
 
 	}

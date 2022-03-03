@@ -37,10 +37,16 @@ public class EquipoController {
 	private long idUse = 0L;
 
 
-	  @GetMapping("/showTeamViews")
+	/***
+	 * Metodo que muestra todos los equipos disponibles de la base de datos
+	 * @param model
+	 * @return Retorna la vista a la que tiene que ir con la lista de equipos
+	 */
+	@GetMapping("/showTeamViews")
 	public String mostrarEquipos(Model model) {
 
-		// Obtención de vehículos
+
+		// Obtención de equipos
 		final List<Equipo> lista = serviceI.obtenerTodosEquipos();
 
 		// Carga de datos al modelo
@@ -51,16 +57,22 @@ public class EquipoController {
 	}
 
 
+	/***
+	 * Metodo que sirve para recoger los datos de un Equipo
+	 * @param teamId la id del equipo a tratar
+	 * @param model
+	 * @return Retorna la vista para modificar los datos
+	 */
 	  @GetMapping("/editTeamsView")
 		public String recogerEquipo(String teamId, Model model) {
 
-			// Obtención de pacientes
-		// Obtención de pacientes
+			// Obtención de equipos
 
 		  idUse = Long.valueOf(teamId);
 					Equipo p = serviceI.obtenerEquipoPorId(Long.valueOf(teamId));
 
 					// Carga de datos al modelo
+					model.addAttribute("id", p.getId());
 					model.addAttribute("nombre", p.getNombre());
 					model.addAttribute("estadio", p.getEstadio());
 					model.addAttribute("fechaCreacion", p.getFechaCreacion());
@@ -68,50 +80,67 @@ public class EquipoController {
 			return "editTeam";
 		}
 
-		@GetMapping("/actEditTeam")
+	   /***
+	   * Metodo que actualiza los datos de un equipo en concreto
+	   * @param EquipoModelo objeto con sus datos a modificar
+	   * @param result
+	   * @return Retorna a la vista de listar de equipos
+	   * @throws Exception para controlar las fechas a la hora de insertar
+	   */
+		@PostMapping("/actEditTeam")
 		public String editarEquipo(@Valid @ModelAttribute EquipoModelo EquipoModelo, BindingResult result) throws Exception {
 
-			Equipo e = new Equipo();
-
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			Date date = formatter.parse(EquipoModelo.getFechaCreacion());
-
-			e.setNombre(EquipoModelo.getNombre());
-			e.setEstadio(EquipoModelo.getEstadio());
-			e.setFechaCreacion(date);
-
-
+			//Comprueba si hay errores a la hora de editar
 			if (result.hasErrors()) {
 				throw new Exception("Parámetros de matriculación erróneos");
 			}
 			else {
 
-				serviceI.eliminarEquipoPorId(idUse);
+				//Sacamos el equipo y sus datos
+				Equipo e = serviceI.obtenerEquipoPorId(EquipoModelo.getId());
+
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				Date date = formatter.parse(EquipoModelo.getFechaCreacion());
+
+				e.setNombre(EquipoModelo.getNombre());
+				e.setEstadio(EquipoModelo.getEstadio());
+				e.setFechaCreacion(date);
+
 				serviceI.actualizarEquipo(e);
-
 			}
-			// Obtención de pacientes
 
-
-			return "redirect:showTeams";
+			return "redirect:showTeamViews";
 		}
 
-
+	/***
+	 * Metodo que elimina un equipo de la base de datos
+	 * @param teamId la id del equipo a borrar
+	 * @param model
+	 * @return Retorna la vista de la lista de equipos
+	 */
 	@PostMapping("/actDropTeam")
 	public String eliminarEquipo(@RequestParam String teamId, Model model) {
 
-		// Eliminación de vehículo
+		// Eliminación de equipo
 		serviceI.eliminarEquipoPorId(Long.valueOf(teamId));
 
-		return "redirect:showTeams";
+		return "redirect:showTeamViews";
 
 	}
 
+	/***
+	 * Metodo que sirve para buscar un equipo por su nombre o por su estadio
+	 * @param searchedTeam objeto con los datos a buscar por campos
+	 * @param model
+	 * @return Retorna una vista y la lista de los equipos que coinciden con los parámtros introducidos
+	 * @throws Exception
+	 */
 	@PostMapping("/actSearchTeam")
 	public String submitBuscarEquipoForm(@ModelAttribute Equipo searchedTeam, Model model) throws Exception {
 
 		List<Equipo> lista = new ArrayList<>();
 
+		//Sacamos los parámetros de búsqueda
 		final String equipoNombre = searchedTeam.getNombre();
 		final String equipoEstadio = searchedTeam.getEstadio();
 
@@ -120,14 +149,14 @@ public class EquipoController {
 
 		if (StringUtils.hasText(equipoNombre)) {
 
-			// Búsqueda por matrícula
+			// Búsqueda por nombre
 			lista = serviceI.obtenerEquipoPorNombre(equipoNombre);
 
 
 		} else if (!StringUtils.hasText(equipoNombre)
 				&& (StringUtils.hasText(equipoEstadio))) {
 
-			// Búsqueda por marca o modelo
+			// Búsqueda por estadio
 			lista = serviceI.obtenerEquipoPorEstadio(equipoEstadio);
 
 		}  else {
@@ -149,11 +178,18 @@ public class EquipoController {
 
 	}
 
+	/***
+	 * Metodo que sirve para añadir un equipo a la base de datos
+	 * @param newEquipoModelo objeto donde recogemos los datos para insertar el equipo
+	 * @param result
+	 * @return Retorna la vista de listar todos los equipos
+	 * @throws Exception para controlar las fechas
+	 */
 
 	@PostMapping("/actAddTeam")
 	private String aniadirEquipo(@Valid @ModelAttribute EquipoModelo newEquipoModelo, BindingResult result) throws Exception {
 
-		//System.out.println(newEquipoModelo.getFechaCreacion());
+		//Sacamos los datos en una clase Equipo Modelo para parsear la fecha
 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -162,6 +198,7 @@ public class EquipoController {
 
 		Equipo e = new Equipo();
 
+		//Volcamos los datos en el nuevo objeto
 		e.setNombre(newEquipoModelo.getNombre());
 		e.setEstadio(newEquipoModelo.getEstadio());
 		e.setFechaCreacion(date);
@@ -172,7 +209,7 @@ public class EquipoController {
 			throw new Exception("Parámetros de matriculación erróneos");
 		} else {
 
-			// Se añade el nuevo coche
+			// Se añade el nuevo equipo
 			serviceI.aniadirEquipo(e);
 		}
 

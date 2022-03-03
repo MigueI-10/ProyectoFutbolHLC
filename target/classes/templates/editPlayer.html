@@ -15,10 +15,10 @@
 	<div class="text-white bg-dark mb-3">
 		<div class="card-header">Datos del Futbolista</div>
 		<div class="card-body">
-			<form th:action="@{/actEditPlayer}" th:object="${FutbolistaModelo}">
+			<form th:action="@{/actEditPlayer}" th:object="${FutbolistaModelo}" method="POST">
 			
-			<input type="hidden" required="required" class="form-control" id="inpCodigo" name="playerId"
-						th:value="${playerId}">
+			<input type="hidden" name="id"
+						th:value="${id}">
 						
 				<div class="form-group">
 					<label for="inpName">Nif</label>

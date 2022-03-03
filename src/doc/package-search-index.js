@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.miguelbc.futbol"},{"l":"com.miguelbc.futbol.controladores"},{"l":"com.miguelbc.futbol.entidades"},{"l":"com.miguelbc.futbol.repositorio"},{"l":"com.miguelbc.futbol.servicios"}];updateSearchResults();
