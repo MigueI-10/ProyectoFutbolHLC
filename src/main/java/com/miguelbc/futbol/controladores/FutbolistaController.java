@@ -181,7 +181,7 @@ public class FutbolistaController {
 			throw new Exception("No se encontró el jugador");
 		}
 
-		return "showPlayerViews";
+		return "showPlayers";
 
 	}
 

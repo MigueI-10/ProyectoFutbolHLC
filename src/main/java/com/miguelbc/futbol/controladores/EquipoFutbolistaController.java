@@ -99,7 +99,7 @@ public class EquipoFutbolistaController {
 		model.addAttribute("teamsListView", listaEquipos);
 		model.addAttribute("btnDropFutbolistaEnabled", Boolean.FALSE);
 
-		return "redirect:showPlayerViews";
+		return "showTeams";
 	}
 
 	////////////////////BUSQUEDA DE EQUIPOS Y SUS JUGADORES INTERNOS
@@ -151,7 +151,7 @@ public class EquipoFutbolistaController {
 		model.addAttribute("playersListView", listaJugadores);
 		model.addAttribute("btnDropFutbolistaEnabled", Boolean.FALSE);
 
-		return "redirect:showTeamViews";
+		return "showPlayers";
 	}
 
 
